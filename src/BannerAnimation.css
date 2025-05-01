@@ -1,0 +1,36 @@
+/* BannerAnimation.css */
+.typing-cursor {
+    animation: blink 0.7s infinite;
+    opacity: 1;
+    margin-left: 2px;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  /* Slide transition */
+  .slide-enter {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .slide-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1000ms, transform 1000ms;
+  }
+  .slide-exit {
+    opacity: 1;
+  }
+  .slide-exit-active {
+    opacity: 0;
+    transition: opacity 1000ms;
+  }
+  
+  /* Text styling */
+  .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
