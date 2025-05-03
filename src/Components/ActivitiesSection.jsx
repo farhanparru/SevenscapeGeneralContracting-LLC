@@ -47,7 +47,7 @@ const activities = [
 
 export default function ParallaxSlider() {
     return (
-      <section className="pt-[7rem] pb-[5rem] bg-white">
+      <section className="pt-[7rem] pb-[5rem] bg-[#F5F5F5]">
         <div className="lg:mx-auto max-w-6xl mx-[1.5rem]">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-[2rem] text-center text-[#003399] font-serif animate-fadeInUp">
             Activities Undertaken

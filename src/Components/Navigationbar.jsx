@@ -46,16 +46,17 @@ const Navigationbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md w-full sticky top-0 z-50">
+    <nav className="bg-white shadow-lg w-full sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <img src={logo} alt="Logo" className="h-12 w-12 object-contain rounded-full" />
+            <img src={logo} alt="Logo" className="h-14 w-14 object-contain rounded-full border-2 border-blue-600 p-1" />
+            <span className="ml-3 text-xl font-bold text-blue-800 font-serif hidden sm:block">Sevenscape</span>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex flex-1 justify-center space-x-6">
+          <div className="hidden md:flex flex-1 justify-center space-x-8">
             {navLinks.map((link) => (
               <div key={link.name} className="relative">
                 {link.subItems ? (
@@ -64,11 +65,11 @@ const Navigationbar = () => {
                       onClick={toggleServices}
                       className={`flex items-center text-base font-medium ${
                         activeLink === link.name
-                          ? 'text-blue-700 border-b-2 border-blue-700'
-                          : 'text-gray-700 hover:text-blue-700 hover:border-b-2 hover:border-blue-700'
-                      } pb-1 transition duration-150 ease-in-out`}
+                          ? 'text-blue-600 border-b-2 border-blue-600 font-semibold'
+                          : 'text-gray-800 hover:text-blue-600 hover:border-b-2 hover:border-blue-600'
+                      } pb-1 transition duration-200 ease-in-out`}
                     >
-                      {link.name}
+                      <span className="font-sans tracking-wide">{link.name}</span>
                       {servicesOpen ? (
                         <ChevronUp size={18} className="ml-1" />
                       ) : (
@@ -76,13 +77,13 @@ const Navigationbar = () => {
                       )}
                     </button>
                     {servicesOpen && (
-                      <div className="absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg z-50">
+                      <div className="absolute left-0 mt-2 w-72 bg-white rounded-md shadow-xl z-50 border border-gray-100">
                         <div className="py-1">
                           {link.subItems.map((subItem, index) => (
                             <a
                               key={index}
                               href="#"
-                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                              className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium transition duration-150"
                             >
                               {subItem}
                             </a>
@@ -97,27 +98,30 @@ const Navigationbar = () => {
                     onClick={() => handleLinkClick(link.name)}
                     className={`text-base font-medium ${
                       activeLink === link.name
-                        ? 'text-blue-700 border-b-2 border-blue-700'
-                        : 'text-gray-700 hover:text-blue-700 hover:border-b-2 hover:border-blue-700'
-                    } pb-1 transition duration-150 ease-in-out`}
+                        ? 'text-blue-600 border-b-2 border-blue-600 font-semibold'
+                        : 'text-gray-800 hover:text-blue-600 hover:border-b-2 hover:border-blue-600'
+                    } pb-1 transition duration-200 ease-in-out`}
                   >
-                    {link.name}
+                    <span className="font-sans tracking-wide">{link.name}</span>
                   </a>
                 )}
               </div>
             ))}
           </div>
 
-          {/* Contact Icon */}
+          {/* Contact Button */}
           <div className="hidden md:flex items-center">
-            <Phone size={22} className="text-blue-700 hover:text-red-600 cursor-pointer transition duration-150 ease-in-out" />
+            <button className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full transition duration-200 shadow-md hover:shadow-lg">
+              <Phone size={18} className="mr-2" />
+              <span className="font-medium">Contact</span>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-blue-700 hover:text-red-600 focus:outline-none"
+              className="text-blue-600 hover:text-blue-800 focus:outline-none transition duration-200"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -127,20 +131,20 @@ const Navigationbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-2 pt-2 pb-3 space-y-1">
+        <div className="md:hidden bg-white px-4 pt-2 pb-4 space-y-2 shadow-lg">
           {navLinks.map((link) => (
             <div key={link.name}>
               {link.subItems ? (
                 <div>
                   <button
                     onClick={toggleMobileServices}
-                    className={`flex items-center justify-between w-full text-base font-medium px-3 py-2 rounded-md ${
+                    className={`flex items-center justify-between w-full text-base font-medium px-4 py-3 rounded-lg ${
                       activeLink === link.name
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'text-gray-700 hover:bg-gray-100 hover:text-blue-700'
-                    }`}
+                        ? 'bg-blue-50 text-blue-600'
+                        : 'text-gray-800 hover:bg-gray-50 hover:text-blue-600'
+                    } transition duration-200`}
                   >
-                    {link.name}
+                    <span className="font-sans tracking-wide">{link.name}</span>
                     {mobileServicesOpen ? (
                       <ChevronUp size={18} />
                     ) : (
@@ -148,12 +152,12 @@ const Navigationbar = () => {
                     )}
                   </button>
                   {mobileServicesOpen && (
-                    <div className="pl-4">
+                    <div className="pl-6 space-y-2 mt-1">
                       {link.subItems.map((subItem, index) => (
                         <a
                           key={index}
                           href="#"
-                          className="block text-base font-medium px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100 hover:text-blue-700"
+                          className="block text-base font-medium px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200"
                         >
                           {subItem}
                         </a>
@@ -165,20 +169,23 @@ const Navigationbar = () => {
                 <a
                   href={link.href}
                   onClick={() => handleLinkClick(link.name)}
-                  className={`block text-base font-medium px-3 py-2 rounded-md ${
+                  className={`block text-base font-medium px-4 py-3 rounded-lg ${
                     activeLink === link.name
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'text-gray-700 hover:bg-gray-100 hover:text-blue-700'
-                  }`}
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-800 hover:bg-gray-50 hover:text-blue-600'
+                  } transition duration-200`}
                 >
-                  {link.name}
+                  <span className="font-sans tracking-wide">{link.name}</span>
                 </a>
               )}
             </div>
           ))}
-          {/* Contact icon in mobile menu */}
-          <div className="flex justify-end pr-4 pt-2">
-            <Phone size={22} className="text-blue-700 hover:text-red-600 cursor-pointer" />
+          {/* Contact button in mobile menu */}
+          <div className="pt-2 px-4">
+            <button className="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full transition duration-200 shadow-md">
+              <Phone size={18} className="mr-2" />
+              <span className="font-medium">Contact Us</span>
+            </button>
           </div>
         </div>
       )}
