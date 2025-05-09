@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import office1 from '../assets/Images/3.jpg'; // Replace with your actual image paths
-import office2 from '../assets/Images/4.jpg';
-import office3 from '../assets/Images/5.jpg';
+import construction1 from '../assets/Images/company1.jpg'; // Construction site images
+import construction2 from '../assets/Images/company2.jpg';
+import construction3 from '../assets/Images/company3.jpg';
+import construction4 from '../assets/Images/company4.jpg';
 
 const About = () => {
     useEffect(() => {
@@ -14,29 +15,60 @@ const About = () => {
           once: true
         });
       }, []);
+
   return (
     <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16" data-aos="fade-up">
           <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-            About Our Company
+            ABOUT US
           </h1>
-          <p className="mt-5 max-w-xl mx-auto text-xl text-gray-500">
-            Building excellence through dedication and innovation
-          </p>
+          <h2 className="mt-6 text-3xl font-bold text-blue-600">
+            General Contractor for Medium Civil Construction & Infrastructure Development
+          </h2>
         </div>
 
-        {/* Office Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          <div className="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up">
+            <div className="text-blue-600 text-4xl mb-4">🏗️</div>
+            <h3 className="text-xl font-bold mb-2">Civil Construction</h3>
+            <p className="text-gray-600">Expertise in medium-scale civil construction projects with precision and quality.</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="100">
+            <div className="text-blue-600 text-4xl mb-4">🛣️</div>
+            <h3 className="text-xl font-bold mb-2">Infrastructure</h3>
+            <p className="text-gray-600">Building the foundational structures that support communities and economies.</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="200">
+            <div className="text-blue-600 text-4xl mb-4">🏢</div>
+            <h3 className="text-xl font-bold mb-2">Development</h3>
+            <p className="text-gray-600">Transforming visions into tangible structures that stand the test of time.</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-md text-center" data-aos="fade-up" data-aos-delay="300">
+            <div className="text-blue-600 text-4xl mb-4">✅</div>
+            <h3 className="text-xl font-bold mb-2">Quality Assurance</h3>
+            <p className="text-gray-600">Rigorous quality control measures ensuring project excellence.</p>
+          </div>
+        </div>
+
+        {/* Construction Project Gallery - 4 images */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           <div data-aos="fade-right" className="overflow-hidden rounded-lg shadow-lg">
-            <img src={office1} alt="Office 1" className="w-full h-64 object-cover transform hover:scale-105 transition duration-500" />
+            <img src={construction1} alt="Construction Project 1" className="w-full h-64 object-cover transform hover:scale-105 transition duration-500" />
           </div>
           <div data-aos="fade-up" className="overflow-hidden rounded-lg shadow-lg">
-            <img src={office2} alt="Office 2" className="w-full h-64 object-cover transform hover:scale-105 transition duration-500" />
+            <img src={construction2} alt="Construction Project 2" className="w-full h-64 object-cover transform hover:scale-105 transition duration-500" />
+          </div>
+          <div data-aos="fade-down" className="overflow-hidden rounded-lg shadow-lg">
+            <img src={construction3} alt="Construction Project 3" className="w-full h-64 object-cover transform hover:scale-105 transition duration-500" />
           </div>
           <div data-aos="fade-left" className="overflow-hidden rounded-lg shadow-lg">
-            <img src={office3} alt="Office 3" className="w-full h-64 object-cover transform hover:scale-105 transition duration-500" />
+            <img src={construction4} alt="Construction Project 4" className="w-full h-64 object-cover transform hover:scale-105 transition duration-500" />
           </div>
         </div>
 
@@ -48,11 +80,12 @@ const About = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
-            <h2 className="ml-4 text-3xl font-bold text-gray-800">VISION</h2>
+            <h2 className="ml-4 text-3xl font-bold text-gray-800">OUR VISION</h2>
           </div>
           <p className="text-xl text-gray-600 leading-relaxed">
-            To continue the legacy and expert services to the development activities in this 
-            blessed nation.
+            To be the preferred partner in medium civil construction and infrastructure development, 
+            delivering exceptional quality and value while contributing to the nation's growth through 
+            sustainable building practices.
           </p>
         </div>
 
@@ -67,9 +100,10 @@ const About = () => {
             <h2 className="ml-4 text-3xl font-bold">GRATITUDE</h2>
           </div>
           <p className="text-xl leading-relaxed">
-            The Management records their sincere gratitude to the sponsors, partners, 
-            employees, reputed clients, credit suppliers, vendors and sub-contractors for fulfilling 
-            our responsibilities.
+            We extend our sincere appreciation to our clients, partners, skilled workforce, 
+            suppliers, and all stakeholders who have contributed to our journey in building 
+            the nation's infrastructure. Your trust and collaboration enable us to deliver 
+            excellence in every project we undertake.
           </p>
         </div>
       </div>

@@ -10,6 +10,7 @@ import ContactUs from "./Components/ContactUs";
 import Projects from "./Components/Projects";
 import About from "./Components/About";
 import IndustriesPage from "./Components/Industries";
+import Dwonfeature from "./Components/Dwonfeature";
 
 function HomePage() {
   return (
@@ -17,6 +18,7 @@ function HomePage() {
     
       <Banner />
       <Brand />
+      <Dwonfeature/>
       <ActivitiesSection />
       <Mainfeatures />
       <QualityAssurance />

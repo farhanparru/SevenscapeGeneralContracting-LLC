@@ -1,8 +1,9 @@
-import { Parallax, Pagination, Navigation } from 'swiper';
+import { Parallax, Pagination, Navigation, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 
 // Sample images - replace with your actual images
 import constructionImg from '../assets/Images/silhouette-engineer-worker-building-site-construction-site-sunset-evening-time_1033579-182640.png';
@@ -53,7 +54,7 @@ export default function ParallaxSlider() {
             Activities Undertaken
           </h1>
           <Swiper
-            modules={[Parallax, Pagination, Navigation]}
+            modules={[Parallax, Pagination, Navigation, Autoplay]}
             speed={600}
             parallax={true}
             pagination={{
@@ -61,6 +62,11 @@ export default function ParallaxSlider() {
             }}
             navigation={true}
             loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true
+            }}
             spaceBetween={30}
             slidesPerView={3}
             centeredSlides={true}
@@ -112,5 +118,4 @@ export default function ParallaxSlider() {
         </div>
       </section>
     );
-  }
-  
+}

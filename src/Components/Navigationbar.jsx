@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
-import { Phone, Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
-import logo from '../assets/Images/WhatsApp Image 2025-04-08 at 16.03.17.jpeg.jpg';
+import React, { useState } from "react";
+import { Phone, Menu, X, ChevronDown, ChevronUp } from "lucide-react";
+import logo from "../assets/Images/WhatsApp Image 2025-04-08 at 16.03.17.jpeg.jpg";
 
 const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/About' },
-    { 
-      name: 'Services', 
-      href: '#',
-      subItems: [
-        'Construction, Infrastructure, development',
-        'Telecom works, Structured cabling',
-        'FTTH – Fiber Optical Works'
-      ]
-    },
-    { name: 'Projects', href: '/Project' },
-    { name: 'Industries', href: '/Industrie' },
-    { name: 'Careers', href: '#' },
-    { name: 'Contact Us', href: '/Contact' },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/About" },
+  {
+    name: "Services",
+    href: "#",
+    subItems: [
+      "Construction, Infrastructure, development",
+      "Telecom works, Structured cabling",
+      "FTTH – Fiber Optical Works",
+    ],
+  },
+  { name: "Projects", href: "/Project" },
+  { name: "Industries", href: "/Industrie" },
+  { name: "Careers", href: "#" },
+  { name: "Contact Us", href: "/Contact" },
 ];
 
 const Navigationbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('Home');
+  const [activeLink, setActiveLink] = useState("Home");
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   const handleLinkClick = (name) => {
     setActiveLink(name);
     setIsOpen(false);
-    if (name !== 'Services') {
+    if (name !== "Services") {
       setServicesOpen(false);
       setMobileServicesOpen(false);
     }
@@ -37,22 +37,44 @@ const Navigationbar = () => {
 
   const toggleServices = () => {
     setServicesOpen(!servicesOpen);
-    setActiveLink('Services');
+    setActiveLink("Services");
   };
 
   const toggleMobileServices = () => {
     setMobileServicesOpen(!mobileServicesOpen);
-    setActiveLink('Services');
+    setActiveLink("Services");
   };
 
   return (
     <nav className="bg-white shadow-lg w-full sticky top-0 z-50 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <img src={logo} alt="Logo" className="h-14 w-14 object-contain rounded-full border-2 border-blue-600 p-1" />
-            <span className="ml-3 text-xl font-bold text-blue-800 font-serif hidden sm:block">Sevenscape</span>
+          {/* Logo and Company Name - Adjusted left margin */}
+          {/* Logo and Company Name - Adjusted left margin */}
+          <div className="flex-shrink-0 flex items-center ml-[-3%]">
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-14 w-14 object-contain rounded-full border-2 border-blue-600 p-1"
+            />
+            <div className="ml-3">
+              {/* Full company name - shown on all screens */}
+              <h1 className="text-lg font-bold text-blue-800 font-serif leading-tight">
+                <span className="hidden sm:block">
+                  <span className="block">
+                    Sevenscape General Contracting and
+                  </span>
+                  <span className="block">
+                    Facility Management Services L.L.C
+                  </span>
+                </span>
+                <span className="sm:hidden text-sm">
+                  <span className="block">Sevenscape General</span>
+                  <span className="block">Contracting & Facility</span>
+                  <span className="block">Management L.L.C</span>
+                </span>
+              </h1>
+            </div>
           </div>
 
           {/* Desktop Menu */}
@@ -65,11 +87,13 @@ const Navigationbar = () => {
                       onClick={toggleServices}
                       className={`flex items-center text-base font-medium ${
                         activeLink === link.name
-                          ? 'text-blue-600 border-b-2 border-blue-600 font-semibold'
-                          : 'text-gray-800 hover:text-blue-600 hover:border-b-2 hover:border-blue-600'
+                          ? "text-blue-600 border-b-2 border-blue-600 font-semibold"
+                          : "text-gray-800 hover:text-blue-600 hover:border-b-2 hover:border-blue-600"
                       } pb-1 transition duration-200 ease-in-out`}
                     >
-                      <span className="font-sans tracking-wide">{link.name}</span>
+                      <span className="font-sans tracking-wide">
+                        {link.name}
+                      </span>
                       {servicesOpen ? (
                         <ChevronUp size={18} className="ml-1" />
                       ) : (
@@ -98,8 +122,8 @@ const Navigationbar = () => {
                     onClick={() => handleLinkClick(link.name)}
                     className={`text-base font-medium ${
                       activeLink === link.name
-                        ? 'text-blue-600 border-b-2 border-blue-600 font-semibold'
-                        : 'text-gray-800 hover:text-blue-600 hover:border-b-2 hover:border-blue-600'
+                        ? "text-blue-600 border-b-2 border-blue-600 font-semibold"
+                        : "text-gray-800 hover:text-blue-600 hover:border-b-2 hover:border-blue-600"
                     } pb-1 transition duration-200 ease-in-out`}
                   >
                     <span className="font-sans tracking-wide">{link.name}</span>
@@ -140,8 +164,8 @@ const Navigationbar = () => {
                     onClick={toggleMobileServices}
                     className={`flex items-center justify-between w-full text-base font-medium px-4 py-3 rounded-lg ${
                       activeLink === link.name
-                        ? 'bg-blue-50 text-blue-600'
-                        : 'text-gray-800 hover:bg-gray-50 hover:text-blue-600'
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-gray-800 hover:bg-gray-50 hover:text-blue-600"
                     } transition duration-200`}
                   >
                     <span className="font-sans tracking-wide">{link.name}</span>
@@ -171,8 +195,8 @@ const Navigationbar = () => {
                   onClick={() => handleLinkClick(link.name)}
                   className={`block text-base font-medium px-4 py-3 rounded-lg ${
                     activeLink === link.name
-                      ? 'bg-blue-50 text-blue-600'
-                      : 'text-gray-800 hover:bg-gray-50 hover:text-blue-600'
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-gray-800 hover:bg-gray-50 hover:text-blue-600"
                   } transition duration-200`}
                 >
                   <span className="font-sans tracking-wide">{link.name}</span>

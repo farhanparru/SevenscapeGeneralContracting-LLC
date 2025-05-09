@@ -59,23 +59,79 @@ const Mainfeatures = () => {
     }
   };
 
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.2, 0.65, 0.3, 0.9]
+      }
+    }
+  };
+
+
+  const mainHeading = "Your Trusted Construction Partner";
+  const tagline = "Building Excellence Since 2008";
+  const subtitle = "Continuing the legacy and reputation of Metro Contracting LLC under the same Management";
+
   return (
     <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          animate="visible"
+          variants={textVariants}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-red-600">
-              Sevenscape General Contracting LLC
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Continuing the legacy and reputation of Metro Contracting LLC under the same Management
-          </p>
+          {/* Main heading with animation */}
+          <motion.h1 
+            className="text-4xl md:text-5xl font-bold text-gray-800 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 700,
+              backgroundImage: 'linear-gradient(to right, #3b82f6, #ef4444)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+              textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              lineHeight: '1.3'
+            }}
+          >
+            {mainHeading}
+          </motion.h1>
+
+          {/* Tagline with different font style */}
+          <motion.p 
+            className="text-2xl md:text-3xl font-medium mb-6 text-gray-700"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontStyle: 'italic'
+            }}
+          >
+            {tagline}
+          </motion.p>
+
+          {/* Subtitle with fade-in animation */}
+          <motion.p 
+            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            style={{
+              fontFamily: "'Open Sans', sans-serif",
+              lineHeight: '1.8'
+            }}
+          >
+            {subtitle}
+          </motion.p>
         </motion.div>
 
         <motion.div 

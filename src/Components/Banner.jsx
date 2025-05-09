@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import slide1 from '../assets/Images/1-1.png';
+import slide1 from '../assets/Images/My.jpg';
 import slide2 from '../assets/Images/image.png';
 import slide3 from '../assets/Images/360_F_449777053_UkgXoBYCWQexHZGuGM5f5VprWLGSnW7B.png';
 import '../BannerAnimation.css';
@@ -9,10 +9,18 @@ const Home = () => {
   const [displayText, setDisplayText] = useState('');
   const slides = [slide1, slide2, slide3];
 
-  const fullText = "General Contractor for Medium Civil Construction, Infrastructure, Development";
-  const typingSpeed = 50; // milliseconds per character
-  const eraseSpeed = 30; // milliseconds per character when erasing
-  const pauseDuration = 2000; // milliseconds to pause between animations
+  // Shorter text options
+  const textOptions = [
+    "Quality Construction Services",
+    "Civil Infrastructure Experts",
+    "Your Trusted Contractor"
+  ];
+  
+  const typingSpeed = 50;
+  const eraseSpeed = 30;
+  const pauseDuration = 2000;
+  // eslint-disable-next-line no-unused-vars
+  const textChangeDelay = 3000; // Delay before switching to next text
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -22,30 +30,35 @@ const Home = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  // Auto-typing effect
+  // Auto-typing effect with multiple text options
   useEffect(() => {
     let timeout;
     let currentIndex = 0;
     let isDeleting = false;
+    let currentTextIndex = 0;
+    let currentText = textOptions[currentTextIndex];
 
     const type = () => {
       if (isDeleting) {
         // Erasing text
-        setDisplayText(fullText.substring(0, currentIndex - 1));
+        setDisplayText(currentText.substring(0, currentIndex - 1));
         currentIndex--;
         
         if (currentIndex === 0) {
           isDeleting = false;
+          // Move to next text
+          currentTextIndex = (currentTextIndex + 1) % textOptions.length;
+          currentText = textOptions[currentTextIndex];
           timeout = setTimeout(type, typingSpeed);
         } else {
           timeout = setTimeout(type, eraseSpeed);
         }
       } else {
         // Typing text
-        setDisplayText(fullText.substring(0, currentIndex + 1));
+        setDisplayText(currentText.substring(0, currentIndex + 1));
         currentIndex++;
         
-        if (currentIndex === fullText.length) {
+        if (currentIndex === currentText.length) {
           isDeleting = true;
           timeout = setTimeout(type, pauseDuration);
         } else {
@@ -60,7 +73,7 @@ const Home = () => {
 
   // Auto-slide effect
   useEffect(() => {
-    const interval = setInterval(nextSlide, 8000); // Longer interval to match typing
+    const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
   }, []);
 
@@ -81,23 +94,21 @@ const Home = () => {
               alt={`Slide ${index + 1}`}
             />
             
-            {/* Auto-typing Text Overlay */}
+            {/* Text Overlay with earthy color theme */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/30">
               <div className="text-center px-4 max-w-4xl">
                 <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide">
                   {displayText}
                   <span className="typing-cursor">|</span>
                 </h1>
-                <button className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300">
-                  Get a Quote
-                </button>
+              
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Indicators */}
+      {/* Indicators - changed to amber color */}
       <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
         {slides.map((_, index) => (
           <button
