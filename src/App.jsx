@@ -11,6 +11,7 @@ import Projects from "./Components/Projects";
 import About from "./Components/About";
 import IndustriesPage from "./Components/Industries";
 import Dwonfeature from "./Components/Dwonfeature";
+import { ToastContainer } from 'react-toastify';
 
 function HomePage() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/Industrie" element={<IndustriesPage/>}/>
       </Routes>
       <Footer />
+      <ToastContainer position="top-right" autoClose={5000} />
     </Router>
   );
 }
