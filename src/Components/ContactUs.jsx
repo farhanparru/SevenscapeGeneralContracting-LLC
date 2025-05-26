@@ -64,7 +64,7 @@ const ContactUs = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8000/api/user/contactUs",
+        "https://sevenscape-general-contracting-backend.vercel.app/api/user/contactUs",
         payload,
         {
           headers: {
