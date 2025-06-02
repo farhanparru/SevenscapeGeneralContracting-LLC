@@ -255,7 +255,7 @@ const ContactUs = () => {
                     <FiPhone className="text-white text-2xl" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl mb-1">Contact Numbers</h3>
+                    <h3 className="font-bold text-xl mb-1">Contact Number</h3>
                     <p className="text-blue-100">02-6211282</p>
                   </div>
                 </motion.div>
