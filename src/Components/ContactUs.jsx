@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import uaeFlag from "../assets/logoImages/image.png";
 import contactBanner from "../assets/Images/istockphoto-1194098130-612x612.png";
 import { motion } from "framer-motion";
-import axios  from "axios";
+import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FiMail, FiPhone, FiMapPin, FiSend } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiSend, FiCheck } from "react-icons/fi";
+import { FaBuilding, FaTools, FaClipboardCheck } from "react-icons/fa";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ const ContactUs = () => {
           countryCode: formData.phone.countryCode,
           number: formData.phone.number,
         },
-        serviceNeeded: formData.serviceNeeded.toLowerCase(), // Ensure lowercase to match enum
+        serviceNeeded: formData.serviceNeeded.toLowerCase(),
         message: formData.message,
       };
 
@@ -75,7 +76,6 @@ const ContactUs = () => {
 
       if (response.status === 200 || response.status === 201) {
         toast.success("Message sent successfully! We will contact you soon.");
-        // Reset form
         setFormData({
           fullName: "",
           email: "",
@@ -92,10 +92,8 @@ const ContactUs = () => {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-
       let errorMessage = "Failed to send message. Please try again later.";
       if (error.response) {
-        // Server responded with a status code outside 2xx range
         if (error.response.data && error.response.data.message) {
           errorMessage = error.response.data.message;
         } else if (error.response.status === 400) {
@@ -104,10 +102,8 @@ const ContactUs = () => {
           errorMessage = "Server error. Please try again later.";
         }
       } else if (error.request) {
-        // Request was made but no response received
         errorMessage = "Network error. Please check your connection.";
       }
-
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -145,158 +141,176 @@ const ContactUs = () => {
     visible: { opacity: 1, transition: { duration: 0.8 } },
   };
 
+  const serviceOptions = [
+    {
+      value: "facility management",
+      label: "Facility Management",
+      icon: <FaBuilding className="text-blue-500 text-xl" />,
+    },
+    {
+      value: "general contracting",
+      label: "General Contracting",
+      icon: <FaTools className="text-blue-500 text-xl" />,
+    },
+    {
+      value: "maintenance services",
+      label: "Maintenance Services",
+      icon: <FaClipboardCheck className="text-blue-500 text-xl" />,
+    },
+    {
+      value: "others",
+      label: "Other Services",
+      icon: <FiCheck className="text-blue-500 text-xl" />,
+    },
+  ];
+
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
-      {/* Left Side - Banner Image with Overlay */}
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+      {/* Hero Section */}
       <motion.div
-        className="lg:w-2/5 w-full h-64 lg:h-auto relative"
+        className="relative w-full h-96 lg:h-screen lg:max-h-[600px] overflow-hidden"
         initial="hidden"
         animate="visible"
         variants={fadeIn}
       >
+        <div className="absolute inset-0 bg-blue-900/80 z-10 flex items-center justify-center">
+          <div className="container mx-auto px-6 lg:px-12 text-center">
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Get In Touch With Us
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              We're here to answer your questions and provide the best service solutions for your needs.
+            </motion.p>
+            <motion.div
+              className="flex justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-red-500 rounded-full"></div>
+            </motion.div>
+          </div>
+        </div>
         <img
           src={contactBanner}
-          alt="Contact Visual"
-          className="w-full h-full object-cover"
+          alt="Construction site"
+          className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-800/50 flex items-center justify-center">
-          <motion.div
-            className="text-white p-8 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Let's Connect
-            </h2>
-            <p className="text-lg md:text-xl mb-6">
-              We're here to help and answer any questions you might have.
-            </p>
-            <div className="flex justify-center">
-              <div className="w-16 h-1 bg-red-500"></div>
-            </div>
-          </motion.div>
-        </div>
       </motion.div>
 
-      {/* Right Side - Contact Form and Info */}
-      <motion.div
-        className="lg:w-3/5 w-full p-8 md:p-12 lg:p-16 bg-white shadow-lg"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        {/* Header */}
-        <motion.div variants={itemVariants}>
-          <motion.h1
-            className="text-4xl font-bold text-blue-900 mb-2"
-            whileHover={{ x: 5 }}
-          >
-            Contact Us
-          </motion.h1>
-          <motion.p
-            className="text-gray-600 mb-8 text-lg"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            Have questions or need assistance? Fill out the form below and we'll
-            get back to you promptly.
-          </motion.p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* Contact Info */}
-          <motion.div className="space-y-6" variants={containerVariants}>
-            <motion.div variants={itemVariants}>
-              <div className="flex items-center mb-4">
-                <motion.img
-                  src={uaeFlag}
-                  alt="UAE Flag"
-                  className="w-12 h-auto mr-3"
-                  whileHover={{ rotate: [0, 5, -5, 0] }}
-                />
-                <h3 className="text-xl font-bold text-gray-800">
-                  Sevenscape General Contracting
-                </h3>
-              </div>
-              <p className="text-gray-700 mb-6">
-                We're committed to providing excellent service and building
-                lasting relationships with our clients.
-              </p>
-            </motion.div>
-
-            <motion.div className="flex items-start" variants={itemVariants}>
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <FiMapPin className="text-blue-700 text-xl" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-800">Our Location</h4>
-                <p className="text-gray-600">
-                  Al Hail Business Centre, Block 1, Unit 8, Office 12
-                </p>
-                <p className="text-gray-600">Mussafah 4, Abu Dhabi</p>
-              </div>
-            </motion.div>
-
-            <motion.div className="flex items-start" variants={itemVariants}>
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <FiPhone className="text-blue-700 text-xl" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-800">Phone Number</h4>
-                <p className="text-gray-600">02-6211282</p>
-              </div>
-            </motion.div>
-
-            <motion.div className="flex items-start" variants={itemVariants}>
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <FiMail className="text-blue-700 text-xl" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-800">Email Address</h4>
-                <a
-                  href="mailto:info.7scapeauh@gmail.com"
-                  className="text-blue-600 hover:underline"
-                >
-                  info.7scapeauh@gmail.com
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div variants={itemVariants}>
-            <motion.form
-              className="space-y-5"
-              variants={containerVariants}
-              onSubmit={handleSubmit}
-            >
+      {/* Main Content */}
+      <div className="container mx-auto px-6 lg:px-12 py-16 -mt-16 lg:-mt-24 relative z-20">
+        <motion.div
+          className="bg-white rounded-xl shadow-2xl overflow-hidden"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <div className="grid lg:grid-cols-2">
+            {/* Contact Information */}
+            <div className="bg-gradient-to-br from-blue-800 to-blue-900 p-10 text-white">
               <motion.div variants={itemVariants}>
-                <label
-                  htmlFor="fullName"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  placeholder="John Smith"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  required
-                />
+                <div className="flex items-center mb-8">
+                  <motion.img
+                    src={uaeFlag}
+                    alt="UAE Flag"
+                    className="w-16 h-auto mr-4"
+                    whileHover={{ rotate: [0, 5, -5, 0] }}
+                  />
+                  <h2 className="text-2xl font-bold">
+                    Sevenscape General Contracting and Facility Management Services L.L.C
+                  </h2>
+                </div>
+                <p className="text-blue-100 mb-10 text-lg">
+                  Your trusted partner for comprehensive facility management and contracting solutions in the UAE.
+                </p>
               </motion.div>
-              <div className="grid grid-cols-1 gap-4">
+
+              <div className="space-y-8">
+                <motion.div className="flex items-start" variants={itemVariants}>
+                  <div className="bg-blue-700/30 p-3 rounded-xl mr-4">
+                    <FiMapPin className="text-white text-2xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">Our Location</h3>
+                    <p className="text-blue-100">
+                      Al Hail Business Centre, Block 1, Unit 8, Office 12
+                    </p>
+                    <p className="text-blue-100">Mussafah 4, Abu Dhabi</p>
+                  </div>
+                </motion.div>
+
+                <motion.div className="flex items-start" variants={itemVariants}>
+                  <div className="bg-blue-700/30 p-3 rounded-xl mr-4">
+                    <FiPhone className="text-white text-2xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">Contact Numbers</h3>
+                    <p className="text-blue-100">02-6211282</p>
+                    <p className="text-blue-100">+971 50 123 4567</p>
+                  </div>
+                </motion.div>
+
+                <motion.div className="flex items-start" variants={itemVariants}>
+                  <div className="bg-blue-700/30 p-3 rounded-xl mr-4">
+                    <FiMail className="text-white text-2xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">Email Address</h3>
+                    <a
+                      href="mailto:info@sevenscape.ae"
+                      className="text-blue-300 hover:text-white transition-colors"
+                    >
+                      info@sevenscape.ae
+                    </a>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="p-10">
+              <motion.div variants={itemVariants}>
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">Send Us a Message</h2>
+                <p className="text-gray-600 mb-8">
+                  Fill out the form below and our team will get back to you within 24 hours.
+                </p>
+              </motion.div>
+
+              <motion.form
+                className="space-y-6"
+                onSubmit={handleSubmit}
+                variants={containerVariants}
+              >
                 <motion.div variants={itemVariants}>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Email
+                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    placeholder="Your full name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    required
+                  />
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -304,19 +318,16 @@ const ContactUs = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="your@email.com"
+                    placeholder="your.email@example.com"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
                   />
                 </motion.div>
 
-                <div className="grid grid-cols-12 gap-2">
-                  <div className="col-span-3">
-                    <label
-                      htmlFor="countryCode"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
-                      Code
+                <motion.div className="grid grid-cols-12 gap-4" variants={itemVariants}>
+                  <div className="col-span-4">
+                    <label htmlFor="countryCode" className="block text-sm font-medium text-gray-700 mb-1">
+                      Country Code
                     </label>
                     <select
                       id="countryCode"
@@ -335,12 +346,9 @@ const ContactUs = () => {
                       <option value="+91">+91 (India)</option>
                     </select>
                   </div>
-                  <div className="col-span-9">
-                    <label
-                      htmlFor="number"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
-                      Phone Number
+                  <div className="col-span-8">
+                    <label htmlFor="number" className="block text-sm font-medium text-gray-700 mb-1">
+                      Phone Number <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="tel"
@@ -355,122 +363,144 @@ const ContactUs = () => {
                       required
                     />
                   </div>
-                </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <label htmlFor="serviceNeeded" className="block text-sm font-medium text-gray-700 mb-1">
+                    Service Needed <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="serviceNeeded"
+                    name="serviceNeeded"
+                    value={formData.serviceNeeded}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none"
+                    required
+                  >
+                    <option value="">Select a service</option>
+                    {serviceOptions.map((service) => (
+                      <option key={service.value} value={service.value}>
+                        {service.label}
+                      </option>
+                    ))}
+                  </select>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="5"
+                    placeholder="Tell us about your project or inquiry..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    maxLength="1000"
+                  ></textarea>
+                </motion.div>
+
+                <motion.div className="flex items-start" variants={itemVariants}>
+                  <div className="flex items-center h-5">
+                    <input
+                      type="checkbox"
+                      id="agree"
+                      name="agree"
+                      checked={formData.agree}
+                      onChange={(e) =>
+                        setFormData({ ...formData, agree: e.target.checked })
+                      }
+                      className="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
+                      required
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="agree" className="text-gray-700">
+                      I agree to the{" "}
+                      <a href="#" className="text-blue-600 hover:underline font-medium">
+                        privacy policy
+                      </a>{" "}
+                      and{" "}
+                      <a href="#" className="text-blue-600 hover:underline font-medium">
+                        terms of service
+                      </a>
+                      <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <button
+                    type="submit"
+                    disabled={!formData.agree || isSubmitting}
+                    className={`w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-4 rounded-lg font-semibold text-lg flex items-center justify-center space-x-3 hover:from-blue-700 hover:to-blue-900 transition-all shadow-lg ${
+                      isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        <span>Processing...</span>
+                      </>
+                    ) : (
+                      <>
+                        <FiSend className="text-xl" />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
+                </motion.div>
+              </motion.form>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Services Highlights */}
+        <motion.div 
+          className="mt-20 grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          {serviceOptions.map((service, index) => (
+            <motion.div
+              key={service.value}
+              className="bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-500 hover:shadow-xl transition-shadow"
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
+            >
+              <div className="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-5">
+                {service.icon}
               </div>
-              <motion.div variants={itemVariants}>
-                <label
-                  htmlFor="serviceNeeded"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Service Needed
-                </label>
-                <select
-                  id="serviceNeeded"
-                  name="serviceNeeded"
-                  value={formData.serviceNeeded}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none"
-                  required
-                >
-                  <option value="">Select a service</option>
-                  <option value="facility management">
-                    Facility Management
-                  </option>
-                  <option value="general contracting">
-                    General Contracting
-                  </option>
-                  <option value="maintenance services">
-                    Maintenance Services
-                  </option>
-                  <option value="others">Other</option>
-                </select>
-              </motion.div>
-              <motion.div variants={itemVariants}>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows="4"
-                  placeholder="How can we help you?"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  maxLength="1000"
-                ></textarea>
-              </motion.div>
-              <motion.div className="flex items-center" variants={itemVariants}>
-                <input
-                  type="checkbox"
-                  id="agree"
-                  name="agree"
-                  checked={formData.agree}
-                  onChange={(e) =>
-                    setFormData({ ...formData, agree: e.target.checked })
-                  }
-                  className="h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
-                  required
-                />
-                <label htmlFor="agree" className="ml-2 text-sm text-gray-600">
-                  I agree to the{" "}
-                  <a href="#" className="text-blue-600 hover:underline">
-                    privacy policy
-                  </a>
-                </label>
-              </motion.div>
-              <motion.button
-                type="submit"
-                className={`w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-3 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 hover:from-blue-700 hover:to-blue-900 transition-all ${
-                  isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-                }`}
-                whileHover={{
-                  scale: isSubmitting ? 1 : 1.02,
-                  boxShadow: isSubmitting
-                    ? "none"
-                    : "0 10px 20px rgba(59, 130, 246, 0.25)",
-                }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                disabled={!formData.agree || isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <>
-                    <FiSend className="text-xl" />
-                    <span>Send Message</span>
-                  </>
-                )}
-              </motion.button>
-            </motion.form>
-          </motion.div>
-        </div>
-      </motion.div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">{service.label}</h3>
+              <p className="text-gray-600">
+                Professional {service.label.toLowerCase()} solutions tailored to your specific requirements.
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 };
