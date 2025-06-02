@@ -257,7 +257,6 @@ const ContactUs = () => {
                   <div>
                     <h3 className="font-bold text-xl mb-1">Contact Numbers</h3>
                     <p className="text-blue-100">02-6211282</p>
-                    <p className="text-blue-100">+971 50 123 4567</p>
                   </div>
                 </motion.div>
 
