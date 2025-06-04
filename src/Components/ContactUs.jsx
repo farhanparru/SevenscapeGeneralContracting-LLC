@@ -189,7 +189,8 @@ const ContactUs = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              We're here to answer your questions and provide the best service solutions for your needs.
+              We're here to answer your questions and provide the best service
+              solutions for your needs.
             </motion.p>
             <motion.div
               className="flex justify-center"
@@ -228,16 +229,21 @@ const ContactUs = () => {
                     whileHover={{ rotate: [0, 5, -5, 0] }}
                   />
                   <h2 className="text-2xl font-bold">
-                    Sevenscape General Contracting and Facility Management Services L.L.C
+                    Sevenscape General Contracting and Facility Management
+                    Services L.L.C
                   </h2>
                 </div>
                 <p className="text-blue-100 mb-10 text-lg">
-                  Your trusted partner for comprehensive facility management and contracting solutions in the UAE.
+                  Your trusted partner for comprehensive facility management and
+                  contracting solutions in the UAE.
                 </p>
               </motion.div>
 
               <div className="space-y-8">
-                <motion.div className="flex items-start" variants={itemVariants}>
+                <motion.div
+                  className="flex items-start"
+                  variants={itemVariants}
+                >
                   <div className="bg-blue-700/30 p-3 rounded-xl mr-4">
                     <FiMapPin className="text-white text-2xl" />
                   </div>
@@ -245,12 +251,21 @@ const ContactUs = () => {
                     <h3 className="font-bold text-xl mb-1">Our Location</h3>
                     <p className="text-blue-100">
                       Al Hail Business Centre, Block 1, Unit 8, Office 12
+                      <br />
+                      PO Box 27720
                     </p>
-                    <p className="text-blue-100">Mussafah 4, Abu Dhabi</p>
+                    <p className="text-blue-100">
+                      Mussafah 4, Abu Dhabi
+                      <br />
+                      PO Box 27720
+                    </p>
                   </div>
                 </motion.div>
 
-                <motion.div className="flex items-start" variants={itemVariants}>
+                <motion.div
+                  className="flex items-start"
+                  variants={itemVariants}
+                >
                   <div className="bg-blue-700/30 p-3 rounded-xl mr-4">
                     <FiPhone className="text-white text-2xl" />
                   </div>
@@ -260,7 +275,10 @@ const ContactUs = () => {
                   </div>
                 </motion.div>
 
-                <motion.div className="flex items-start" variants={itemVariants}>
+                <motion.div
+                  className="flex items-start"
+                  variants={itemVariants}
+                >
                   <div className="bg-blue-700/30 p-3 rounded-xl mr-4">
                     <FiMail className="text-white text-2xl" />
                   </div>
@@ -280,9 +298,12 @@ const ContactUs = () => {
             {/* Contact Form */}
             <div className="p-10">
               <motion.div variants={itemVariants}>
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">Send Us a Message</h2>
+                <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                  Send Us a Message
+                </h2>
                 <p className="text-gray-600 mb-8">
-                  Fill out the form below and our team will get back to you within 24 hours.
+                  Fill out the form below and our team will get back to you
+                  within 24 hours.
                 </p>
               </motion.div>
 
@@ -292,7 +313,10 @@ const ContactUs = () => {
                 variants={containerVariants}
               >
                 <motion.div variants={itemVariants}>
-                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="fullName"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Full Name <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -308,7 +332,10 @@ const ContactUs = () => {
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Email Address <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -323,9 +350,15 @@ const ContactUs = () => {
                   />
                 </motion.div>
 
-                <motion.div className="grid grid-cols-12 gap-4" variants={itemVariants}>
+                <motion.div
+                  className="grid grid-cols-12 gap-4"
+                  variants={itemVariants}
+                >
                   <div className="col-span-4">
-                    <label htmlFor="countryCode" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="countryCode"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Country Code
                     </label>
                     <select
@@ -346,7 +379,10 @@ const ContactUs = () => {
                     </select>
                   </div>
                   <div className="col-span-8">
-                    <label htmlFor="number" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="number"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -365,7 +401,10 @@ const ContactUs = () => {
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
-                  <label htmlFor="serviceNeeded" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="serviceNeeded"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Service Needed <span className="text-red-500">*</span>
                   </label>
                   <select
@@ -386,7 +425,10 @@ const ContactUs = () => {
                 </motion.div>
 
                 <motion.div variants={itemVariants}>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Your Message
                   </label>
                   <textarea
@@ -401,7 +443,10 @@ const ContactUs = () => {
                   ></textarea>
                 </motion.div>
 
-                <motion.div className="flex items-start" variants={itemVariants}>
+                <motion.div
+                  className="flex items-start"
+                  variants={itemVariants}
+                >
                   <div className="flex items-center h-5">
                     <input
                       type="checkbox"
@@ -418,11 +463,17 @@ const ContactUs = () => {
                   <div className="ml-3 text-sm">
                     <label htmlFor="agree" className="text-gray-700">
                       I agree to the{" "}
-                      <a href="#" className="text-blue-600 hover:underline font-medium">
+                      <a
+                        href="#"
+                        className="text-blue-600 hover:underline font-medium"
+                      >
                         privacy policy
                       </a>{" "}
                       and{" "}
-                      <a href="#" className="text-blue-600 hover:underline font-medium">
+                      <a
+                        href="#"
+                        className="text-blue-600 hover:underline font-medium"
+                      >
                         terms of service
                       </a>
                       <span className="text-red-500">*</span>
@@ -476,7 +527,7 @@ const ContactUs = () => {
         </motion.div>
 
         {/* Services Highlights */}
-        <motion.div 
+        <motion.div
           className="mt-20 grid md:grid-cols-2 lg:grid-cols-4 gap-8"
           initial="hidden"
           animate="visible"
@@ -492,9 +543,12 @@ const ContactUs = () => {
               <div className="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-5">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">{service.label}</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">
+                {service.label}
+              </h3>
               <p className="text-gray-600">
-                Professional {service.label.toLowerCase()} solutions tailored to your specific requirements.
+                Professional {service.label.toLowerCase()} solutions tailored to
+                your specific requirements.
               </p>
             </motion.div>
           ))}
